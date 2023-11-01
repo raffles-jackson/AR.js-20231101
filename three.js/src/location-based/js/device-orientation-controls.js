@@ -131,19 +131,8 @@ class DeviceOrientationControls extends EventDispatcher {
       const device = scope.deviceOrientation;
 
       if (device) {
-        // let alpha = device.alpha
-        //   ? MathUtils.degToRad(device.alpha) + scope.alphaOffset
-        
-        // iOS compass-calibrated 'alpha' patch
-        // see: https://github.com/AR-js-org/AR.js/pull/467/commits/1a4c9fdf366f2a4fae75cd8568ab3d531561c097
-        const heading = device.webkitCompassHeading || device.compassHeading;
-        console.log(device.alpha)
-        console.log(heading)
-        const alpha = device.alpha || heading
-          ? MathUtils.degToRad(
-              heading  
-              ? 360 - heading
-              : device.alpha || 0) + scope.alphaOffset
+        let alpha = device.alpha
+          ? MathUtils.degToRad(device.alpha) + scope.alphaOffset
           : 0; // Z
 
         let beta = device.beta ? MathUtils.degToRad(device.beta) : 0; // X'
